@@ -22,5 +22,39 @@ public class PolicyHandler {
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}
+
+    @StreamListener(
+            value = KafkaProcessor.INPUT,
+            condition = "headers['type']=='NotAvailableBook'"
+    )
+    public void wheneverNotAvailableBook_UpdateNotAvailable(
+            @Payload NotAvailableBook notAvailableBook
+    ) {
+        NotAvailableBook event = notAvailableBook;
+        System.out.println(
+                "\n\n##### listener UpdateNotAvailable : " +
+                        notAvailableBook +
+                        "\n\n"
+        );
+
+        // Sample Logic //
+        Rental.updateNotAvailable(event);
+    }
+
+    @StreamListener(
+            value = KafkaProcessor.INPUT,
+            condition = "headers['type']=='BookRollbacked'"
+    )
+    public void wheneverBookRollbacked_UpdateLackOfPoints(
+            @Payload BookRollbacked bookRollbacked
+    ) {
+        BookRollbacked event = bookRollbacked;
+        System.out.println(
+                "\n\n##### listener UpdateLackOfPoints : " + bookRollbacked + "\n\n"
+        );
+
+        // Sample Logic //
+        Rental.updateLackOfPoints(event);
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

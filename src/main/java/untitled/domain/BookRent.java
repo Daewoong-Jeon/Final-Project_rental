@@ -15,6 +15,7 @@ public class BookRent extends AbstractEvent {
     private String bookId;
     private Date rentalDate;
     private Date requiredReturnDate;
+    private Long id;
 
     public BookRent(Rental aggregate) {
         super(aggregate);
