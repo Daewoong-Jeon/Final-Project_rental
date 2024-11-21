@@ -1,6 +1,7 @@
 package untitled.domain;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -49,7 +50,16 @@ public class Rental {
 
     //<<< Clean Arch / Port Method
     public void rentBook(RentBookCommand rentBookCommand) {
-        //implement business logic here:
+        Date now = new Date();
+
+        setBookId(rentBookCommand.getBookId());
+        setMemberId(rentBookCommand.getMemberId());
+        setRentalDate(now);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 6); // 일 계산
+        Date requiredReturnDate = new Date(cal.getTimeInMillis());
+        setRequiredReturnDate(requiredReturnDate);
 
         BookRent bookRent = new BookRent(this);
         bookRent.publishAfterCommit();
@@ -58,7 +68,11 @@ public class Rental {
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public void returnBook(ReturnBookCommand returnBookCommand) {
-        //implement business logic here:
+        Date now = new Date();
+
+        setRentalDate(now);
+        if (getRequiredReturnDate().compareTo(now) < 0)
+            setOverdueYn("Y");
 
         BookReturned bookReturned = new BookReturned(this);
         bookReturned.publishAfterCommit();
