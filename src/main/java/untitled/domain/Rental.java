@@ -102,7 +102,7 @@ public class Rental {
 //        });
 
         repository().findByBookIdAndMemberIdAndResult(notAvailableReturned.getId(), notAvailableReturned.getMemberId(), "rent success").ifPresent(rental->{
-            rental.setResult("fail: LackOfPoints");
+            rental.setResult("fail: NotAvailableBook");
             repository().save(rental);
         });
 
