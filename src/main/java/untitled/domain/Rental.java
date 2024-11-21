@@ -57,7 +57,7 @@ public class Rental {
         setRentalDate(now);
 
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 6); // 일 계산
+        cal.add(Calendar.DATE, 7); // 일 계산
         Date requiredReturnDate = new Date(cal.getTimeInMillis());
         setRequiredReturnDate(requiredReturnDate);
 
@@ -70,7 +70,7 @@ public class Rental {
     public void returnBook(ReturnBookCommand returnBookCommand) {
         Date now = new Date();
 
-        setRentalDate(now);
+        setReturnDate(now);
         if (getRequiredReturnDate().compareTo(now) < 0)
             setOverdueYn("Y");
 
