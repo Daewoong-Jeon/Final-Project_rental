@@ -96,11 +96,16 @@ public class Rental {
 
         // Example 2:  finding and process
 
-         repository().findById(notAvailableBook.getRentalId().longValue()).ifPresent(rental->{
+        repository().findByBookIdAndMemberIdAndResult(notAvailableBook.getId(), notAvailableBook.getMemberId(), "rent success").ifPresent(rental->{
+            rental.setResult("fail: NotAvailableBook");
+            repository().save(rental);
+        });
 
-             rental.setResult("fail: NotAvailableBook");
-             repository().save(rental);
-         });
+//         repository().findById(notAvailableBook.getRentalId().longValue()).ifPresent(rental->{
+//
+//             rental.setResult("fail: NotAvailableBook");
+//             repository().save(rental);
+//         });
 
     }
 
@@ -116,11 +121,16 @@ public class Rental {
 
         // Example 2:  finding and process
 
-         repository().findById(bookRollbacked.getRentalId().longValue()).ifPresent(rental->{
+        repository().findByBookIdAndMemberIdAndResult(bookRollbacked.getId(), bookRollbacked.getMemberId(), "rent success").ifPresent(rental->{
+            rental.setResult("fail: LackOfPoints");
+            repository().save(rental);
+        });
 
-             rental.setResult("fail: LackOfPoints");
-             repository().save(rental);
-         });
+//         repository().findById(bookRollbacked.getRentalId().longValue()).ifPresent(rental->{
+//
+//             rental.setResult("fail: LackOfPoints");
+//             repository().save(rental);
+//         });
 
     }
 }
