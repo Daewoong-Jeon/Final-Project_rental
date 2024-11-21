@@ -57,6 +57,7 @@ public class Rental {
         setBookId(rentBookCommand.getBookId());
         setMemberId(rentBookCommand.getMemberId());
         setRentalDate(now);
+        setResult("rent success");
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 7); // 일 계산
@@ -73,6 +74,7 @@ public class Rental {
         Date now = new Date();
 
         setReturnDate(now);
+        setResult("return success");
         if (getRequiredReturnDate().compareTo(now) < 0)
             setOverdueYn("Y");
 
@@ -92,14 +94,13 @@ public class Rental {
          repository().save(rental);
          */
 
-        /** Example 2:  finding and process
+        // Example 2:  finding and process
 
-         repository().findById(notAvailableBook.get???()).ifPresent(rental->{
+         repository().findById(notAvailableBook.getRentalId().longValue()).ifPresent(rental->{
 
-         rental // do something
-         repository().save(rental);
+             rental.setResult("fail: NotAvailableBook");
+             repository().save(rental);
          });
-         */
 
     }
 
@@ -113,14 +114,13 @@ public class Rental {
          repository().save(rental);
          */
 
-        /** Example 2:  finding and process
+        // Example 2:  finding and process
 
-         repository().findById(bookRollbacked.get???()).ifPresent(rental->{
+         repository().findById(bookRollbacked.getRentalId().longValue()).ifPresent(rental->{
 
-         rental // do something
-         repository().save(rental);
+             rental.setResult("fail: LackOfPoints");
+             repository().save(rental);
          });
-         */
 
     }
 }
