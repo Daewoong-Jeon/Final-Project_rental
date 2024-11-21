@@ -46,5 +46,23 @@ public class Rental {
         );
         return rentalRepository;
     }
+
+    //<<< Clean Arch / Port Method
+    public void rentBook(RentBookCommand rentBookCommand) {
+        //implement business logic here:
+
+        BookRent bookRent = new BookRent(this);
+        bookRent.publishAfterCommit();
+    }
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
+    public void returnBook(ReturnBookCommand returnBookCommand) {
+        //implement business logic here:
+
+        BookReturned bookReturned = new BookReturned(this);
+        bookReturned.publishAfterCommit();
+    }
+    //>>> Clean Arch / Port Method
 }
 //>>> DDD / Aggregate Root
