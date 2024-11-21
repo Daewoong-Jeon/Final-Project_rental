@@ -25,15 +25,15 @@ public class PolicyHandler {
 
     @StreamListener(
             value = KafkaProcessor.INPUT,
-            condition = "headers['type']=='NotAvailableBook'"
+            condition = "headers['type']=='NotAvailableReturned'"
     )
-    public void wheneverNotAvailableBook_UpdateNotAvailable(
-            @Payload NotAvailableBook notAvailableBook
+    public void wheneverNotAvailableReturned_UpdateNotAvailable(
+            @Payload NotAvailableReturned notAvailableReturned
     ) {
-        NotAvailableBook event = notAvailableBook;
+        NotAvailableReturned event = notAvailableReturned;
         System.out.println(
                 "\n\n##### listener UpdateNotAvailable : " +
-                        notAvailableBook +
+                        notAvailableReturned +
                         "\n\n"
         );
 

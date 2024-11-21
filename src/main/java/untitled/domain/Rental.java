@@ -86,7 +86,7 @@ public class Rental {
     //>>> Clean Arch / Port Method
 
     //<<< Clean Arch / Port Method
-    public static void updateNotAvailable(NotAvailableBook notAvailableBook) {
+    public static void updateNotAvailable(NotAvailableReturned notAvailableReturned) {
         //implement business logic here:
 
         /** Example 1:  new item
@@ -96,16 +96,15 @@ public class Rental {
 
         // Example 2:  finding and process
 
-        repository().findById(notAvailableBook.getRentalId().longValue()).ifPresent(rental->{
-            rental.setResult("fail: NotAvailableBook");
+//        repository().findById(notAvailableReturned.getRentalId().longValue()).ifPresent(rental->{
+//            rental.setResult("fail: NotAvailableBook");
+//            repository().save(rental);
+//        });
+
+        repository().findByBookIdAndMemberIdAndResult(notAvailableReturned.getId(), notAvailableReturned.getMemberId(), "rent success").ifPresent(rental->{
+            rental.setResult("fail: LackOfPoints");
             repository().save(rental);
         });
-
-//         repository().findById(notAvailableBook.getRentalId().longValue()).ifPresent(rental->{
-//
-//             rental.setResult("fail: NotAvailableBook");
-//             repository().save(rental);
-//         });
 
     }
 

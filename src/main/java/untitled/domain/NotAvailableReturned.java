@@ -7,10 +7,9 @@ import untitled.infra.AbstractEvent;
 
 @Data
 @ToString
-public class NotAvailableBook extends AbstractEvent {
+public class NotAvailableReturned extends AbstractEvent {
 
     private String id;
     private String memberId;
     private String status;
-    private Integer rentalId;
 }
