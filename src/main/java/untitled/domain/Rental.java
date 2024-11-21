@@ -36,11 +36,11 @@ public class Rental {
 
     @PostPersist
     public void onPostPersist() {
-        BookRent bookRent = new BookRent(this);
-        bookRent.publishAfterCommit();
-
-        BookReturned bookReturned = new BookReturned(this);
-        bookReturned.publishAfterCommit();
+//        BookRent bookRent = new BookRent(this);
+//        bookRent.publishAfterCommit();
+//
+//        BookReturned bookReturned = new BookReturned(this);
+//        bookReturned.publishAfterCommit();
     }
 
     public static RentalRepository repository() {
