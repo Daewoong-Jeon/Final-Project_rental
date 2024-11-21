@@ -96,7 +96,7 @@ public class Rental {
 
         // Example 2:  finding and process
 
-        repository().findByBookIdAndMemberIdAndResult(notAvailableBook.getId(), notAvailableBook.getMemberId(), "rent success").ifPresent(rental->{
+        repository().findById(notAvailableBook.getRentalId().longValue()).ifPresent(rental->{
             rental.setResult("fail: NotAvailableBook");
             repository().save(rental);
         });
